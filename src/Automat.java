@@ -25,24 +25,35 @@ class Automat{
   
         boolean analizaCuvant(String cuvant)
         {
-        String stare = st_init;
-        int i;
-        for(i=0;i < cuvant.length();i++)
+        String stare=st_init;
+        for(int i=0;i<cuvant.length();i++)
         {
-            Tranzitie tr = lt.gasesteTranzitie(stare,cuvant.charAt(i));
-            if(tr.spuneSimbol()==cuvant.charAt(i))
-                stare = tr.spuneStSfarsit();
-            else
+            if(lt.gasesteTranzitie(stare,cuvant.charAt(i))==null)
+            {
+                System.out.print("Cuvantul este acceptat de automat: ");
                 return false;
+            }
+            stare=lt.gasesteTranzitie(stare,cuvant.charAt(i)).spuneStSfarsit();
         }
-        i=0;
-        while(i < st_finale.length){
+        for(int i=0;i<st_finale.length;i++)
+        {
             if(stare.equals(st_finale[i]))
+            {
+                System.out.print("Cuvantul este acceptat de automat: ");
                 return true;
-            else
-                i++;
+            }
         }
         return false;
+        }
+        
+        public void afiseazaAlfabetul(){
+            HashSet<Character> litere = new HashSet<>();
+            for(Tranzitie tranzitie:lt.lista){
+                    litere.add(tranzitie.spuneSimbol());
+            }
+            for(char lit:litere){
+                System.out.println(lit);
+            }
         }
         
         public void afiseazaAutomat()
