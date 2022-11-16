@@ -70,5 +70,15 @@ class Automat{
                 System.out.println(tranzitie.spuneStInceput()+" -> "+tranzitie.spuneSimbol()+" -> "+tranzitie.spuneStSfarsit());
             }
         }
+        
+        public void afiseazaAlfabetul(){
+            HashSet<Character> litere = new HashSet<>();
+            for(Tranzitie tranzitie:lt.lista){
+                    litere.add(tranzitie.spuneSimbol());
+            }
+            for(char lit:litere){
+                System.out.println(lit);
+            }
+        }
 }
 
